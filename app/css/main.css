@@ -2472,7 +2472,7 @@ body {
   max-width: 620px;
   margin: 0 auto;
   position: absolute;
-  top: 30%;
+  top: 15%;
   left: 0;
   right: 0; }
 
@@ -2492,8 +2492,7 @@ body {
   display: flex;
   justify-content: space-between; }
   .filter-app-search-input {
-    width: 100%;
-    max-width: 280px;
+    width: 48%;
     background: #fff;
     position: relative;
     border-radius: 20px; }
@@ -2512,14 +2511,50 @@ body {
       border-radius: 20px;
       font-size: 14px;
       outline: none; }
-      .filter-app-search-input .input--margin {
-        margin-left: 18px; }
+      .filter-app-search-input .input--padding {
+        padding-left: 40px; }
+
+.filter-app-friends {
+  padding: 0px 0px 18px;
+  background: #fff; }
+  .filter-app-friends-your, .filter-app-friends-in-list {
+    width: 49%;
+    padding: 0px 15px;
+    vertical-align: top;
+    display: inline-block;
+    min-height: 300px; }
+    .filter-app-friends-your .item, .filter-app-friends-in-list .item {
+      height: 60px;
+      padding: 5px;
+      border-bottom: 1px solid #f0f0f0; }
+      .filter-app-friends-your .item-logo, .filter-app-friends-in-list .item-logo {
+        display: inline-block;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        background: #ccc; }
+      .filter-app-friends-your .item-title, .filter-app-friends-in-list .item-title {
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        color: #4f4f4f;
+        font-weight: normal;
+        padding: 13px 10px; }
+      .filter-app-friends-your .item-close, .filter-app-friends-in-list .item-close {
+        color: #c4c4c4;
+        margin-top: 15px; }
+      .filter-app-friends-your .item:hover, .filter-app-friends-in-list .item:hover {
+        background: #f0f0f0;
+        cursor: pointer;
+        transition: all 0.5s ease; }
+  .filter-app-friends-your {
+    border-right: 1px solid #f0f0f0; }
 
 .filter-app-footer {
   background: #f0f0f0;
   padding: 14px;
   border-bottom-right-radius: 6px;
-  border-top-left-radius: 6px; }
+  border-bottom-left-radius: 6px; }
   .filter-app-footer {
     *zoom: 1; }
   .filter-app-footer:before, .filter-app-footer:after {
@@ -2539,6 +2574,13 @@ body {
     .filter-app-footer button:hover {
       cursor: pointer;
       background: #ff663a; }
+
+.title-friends {
+  color: #4f4f4f;
+  font-size: 15px;
+  font-weight: normal;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0; }
 
 .close {
   display: inline-block;
