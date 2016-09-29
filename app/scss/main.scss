@@ -94,15 +94,18 @@ body {
     }
 
     &-friends {
-      padding: 0px 0px 18px;
+      padding: 0px;
       background: #fff;
+			display: flex;
 
       &-your, &-in-list {
-        width: 49%;
+        width: 50%;
         padding: 0px 15px;
         vertical-align: top;
         display: inline-block;
-        min-height: 300px;
+				overflow-y: scroll;
+        max-height: 350px;
+				min-height: 350px;
 
         .item {
           height: 60px;
