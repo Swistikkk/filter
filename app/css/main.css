@@ -2535,7 +2535,8 @@ body {
         border-radius: 50%;
         width: 45px;
         height: 45px;
-        background: #ccc; }
+        background: #ccc;
+        background-size: contain !important; }
       .filter-app-friends-your .item-title, .filter-app-friends-in-list .item-title {
         font-size: 14px;
         display: inline-block;
