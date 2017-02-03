@@ -9,6 +9,7 @@ window.addEventListener('load', (event) => {
         VK.Auth.login(function(response){
             if(response.status == 'connected') {
                 resolve();
+                console.log(response);
             } else {
                 console.log(response);
             }
@@ -16,12 +17,7 @@ window.addEventListener('load', (event) => {
     }).then(()=> {
         VK.api('friends.get',{fields: 'photo_100', order: 'name', name_case: 'nom'},function(answer) {
             allUsers = answer.response;
+            console.log(answer);
         });
-    })
+    });
 });
-
-console.log(allUsers);
-
-if(allUsers.length > 1) {
-    console.log(allUsers);
-}

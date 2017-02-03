@@ -12,5 +12,11 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader'
         }]
+    },
+
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+        contentBase: __dirname + '/app'
     }
 };
