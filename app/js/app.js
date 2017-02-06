@@ -19,12 +19,21 @@ new Promise((resolve, reject) => {
     });
   })
 }).then((usersVk) => {
-  let vkUsers = usersVk;
-  let myFriends = [];
+  let vkUsers = getFromLocalStorage('vkUsers') || usersVk;
+  let myFriends = getFromLocalStorage('myFriends') || [];
   let searchInputMyFriend = document.querySelector('.filter-app-search-input__myFriends input');
   let vkFriendsBlock = document.querySelector('.filter-app-friends-your__wrapper');
   let myFriendBlock = document.querySelector('.filter-app-friends-in-list__wrapper');
   let searchInputVkFriends = document.querySelector('.filter-app-search-input input');
+  let saveButton = document.querySelector('.filter-app-footer button');
+
+  function getFromLocalStorage(key) {
+    if(localStorage[key]) {
+      return JSON.parse(localStorage[key]);
+    }
+
+    return false;
+  };
 
   function renderUsers(arrayOfUsers, blockToAppend, action) {
     blockToAppend.innerHTML = '';
@@ -32,8 +41,10 @@ new Promise((resolve, reject) => {
     arrayOfUsers.forEach((user) => {
       let userItem = document.createElement('div');
 
+      userItem.setAttribute('draggable', true);
       userItem.classList.add('item');
       userItem.setAttribute('data-id', user.user_id);
+      userItem.setAttribute('id', user.user_id);
 
       if(action == 'remove') {
         userItem.innerHTML = `
@@ -51,11 +62,16 @@ new Promise((resolve, reject) => {
         </div>`;
       }
 
+      userItem.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData("userItem", event.target.dataset.id);
+      });
+
       blockToAppend.appendChild(userItem);
     });
   }
 
   renderUsers(vkUsers, vkFriendsBlock);
+  renderUsers(myFriends, myFriendBlock, 'remove');
 
   searchInputVkFriends.addEventListener('keyup', (event) => {
     let inputValue = event.currentTarget.value;
@@ -88,17 +104,7 @@ new Promise((resolve, reject) => {
       // ToDO Сделать проверку если это крести и если это блок крестика
       let idUser = event.target.parentElement.parentElement.dataset.id;
 
-      vkUsers = vkUsers.filter((user) => {
-        if(user.user_id == idUser) {
-          myFriends.push(user);
-        }
-
-        if(user.user_id != idUser) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+      setVkUsers(idUser);
 
       renderUsers(vkUsers, vkFriendsBlock);
       renderUsers(myFriends, myFriendBlock, 'remove');
@@ -110,21 +116,86 @@ new Promise((resolve, reject) => {
       // ToDO Сделать проверку если это крести и если это блок крестика
       let idUser = event.target.parentElement.parentElement.dataset.id;
 
-      myFriends = myFriends.filter((user) => {
-        if(user.user_id == idUser) {
-          vkUsers.unshift(user);
-        }
-
-        if(user.user_id != idUser) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-
+      setMyFriends(idUser);
       renderUsers(vkUsers, vkFriendsBlock);
       renderUsers(myFriends, myFriendBlock, 'remove');
     }
+  });
+
+  function setVkUsers(id) {
+    vkUsers = vkUsers.filter((user) => {
+      if(user.user_id == id) {
+        myFriends.push(user);
+      }
+
+      if(user.user_id != id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  function setMyFriends(id) {
+    myFriends = myFriends.filter((user) => {
+      if(user.user_id == id) {
+        vkUsers.unshift(user);
+      }
+
+      if(user.user_id !=id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+  }
+
+
+
+
+
+  // Drop to vkFriendBlock
+
+  vkFriendsBlock.addEventListener('dragover', (event) => {
+    event.preventDefault();
+  });
+
+  vkFriendsBlock.addEventListener('drop', (event) => {
+    event.preventDefault();
+
+    var data = event.dataTransfer.getData("userItem");
+    myFriendBlock.removeChild(document.getElementById(data));
+
+    setMyFriends(data);
+    renderUsers(vkUsers, vkFriendsBlock);
+  });
+
+
+
+
+
+
+  // Drop to myFriendsBlock
+
+  myFriendBlock.addEventListener('dragover', (event) => {
+    event.preventDefault();
+  });
+
+  myFriendBlock.addEventListener('drop', (event) => {
+    event.preventDefault();
+
+    var data = event.dataTransfer.getData("userItem");
+    vkFriendsBlock.removeChild(document.getElementById(data));
+
+    setVkUsers(data);
+    renderUsers(myFriends, myFriendBlock, 'remove');
+  })
+
+
+  saveButton.addEventListener('click', (event) => {
+    localStorage.setItem('vkUsers', JSON.stringify(vkUsers));
+    localStorage.setItem('myFriends', JSON.stringify(myFriends));
   });
 });
 

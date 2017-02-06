@@ -105,6 +105,10 @@ body {
         overflow-y: scroll;
         flex: 1 1 50%;
 
+        &__wrapper {
+          min-height: 349px;
+        }
+
         .item {
           height: 60px;
           padding: 5px;

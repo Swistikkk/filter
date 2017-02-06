@@ -2524,6 +2524,8 @@ body {
     height: 400px;
     overflow-y: scroll;
     flex: 1 1 50%; }
+    .filter-app-friends-your__wrapper, .filter-app-friends-in-list__wrapper {
+      min-height: 349px; }
     .filter-app-friends-your .item, .filter-app-friends-in-list .item {
       height: 60px;
       padding: 5px;
