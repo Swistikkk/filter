@@ -43,12 +43,8 @@ gulp.task('babel', function(){
     .pipe(gulp.dest('app/js/'));
 });
 
-gulp.task('watch', ['browser-sync', 'babel'], function(){
+gulp.task('watch', function(){
   gulp.watch('app/scss/**/*.scss', ['scss']);
-  gulp.watch('app/css/**/*.css', browserSync.reload);
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch(['!app/js/build.js', '!app/js/build.js.map', 'app/js/**/*.js'], ['babel']);
-  gulp.watch('app/js/*.js', browserSync.reload);
 });
 
 gulp.task('default', ['watch']);

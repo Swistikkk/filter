@@ -2515,14 +2515,15 @@ body {
         padding-left: 40px; }
 
 .filter-app-friends {
-  padding: 0px 0px 18px;
-  background: #fff; }
+  padding: 0px;
+  background: #fff;
+  display: flex; }
   .filter-app-friends-your, .filter-app-friends-in-list {
-    width: 49%;
     padding: 0px 15px;
     vertical-align: top;
-    display: inline-block;
-    min-height: 300px; }
+    height: 400px;
+    overflow-y: scroll;
+    flex: 1 1 50%; }
     .filter-app-friends-your .item, .filter-app-friends-in-list .item {
       height: 60px;
       padding: 5px;
