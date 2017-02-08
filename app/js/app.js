@@ -1,7 +1,3 @@
-VK.init({
-  apiId: 5629026,
-});
-
 function getFromLocalStorage(key) {
   return JSON.parse(localStorage[key] || null);
 };
@@ -17,6 +13,10 @@ window.addEventListener('load', () => {
   let saveButton = document.querySelector('.filter-app-footer button');
 
   if(!vkUsers) {
+    VK.init({
+      apiId: 5629026,
+    });
+
     new Promise((resolve, reject) => {
       VK.Auth.login(function(response){
         if(response.status == 'connected') {
